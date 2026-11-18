@@ -1,4 +1,4 @@
-import { VECNA_LINES } from "../constants/vecnaLines.js";
+
 import {
     AUDIO_CONFIG,
     DEFAULT_AUDIO_SETTINGS,
@@ -11,6 +11,7 @@ class SoundController {
     private gameplay: HTMLAudioElement | null = null;
     private death: HTMLAudioElement | null = null;
     private victory: HTMLAudioElement | null = null;
+    private vecnaVoice: HTMLAudioElement | null = null;
     private fadeTimer: number | null = null;
     private muted: boolean = DEFAULT_AUDIO_SETTINGS.muted;
     private volume: number = DEFAULT_AUDIO_SETTINGS.volume;
@@ -75,7 +76,10 @@ class SoundController {
         this.muted = value;
         this.ensureTracks();
         this.syncTracks();
-        if (value) window.speechSynthesis?.cancel();
+        if (value && this.vecnaVoice) {
+            this.vecnaVoice.pause();
+            this.vecnaVoice.currentTime = 0;
+        }
     }
 
     setVolume(value: number) {
@@ -230,6 +234,33 @@ class SoundController {
         window.setTimeout(() => this.attack(true), 650);
     }
 
+    private playVecnaVoice(finalKill = false) {
+        // Stop the previous Vecna dialogue.
+        if (this.vecnaVoice) {
+            this.vecnaVoice.pause();
+            this.vecnaVoice.currentTime = 0;
+        }
+
+        const voiceFiles = [
+            "/sounds/vecna/vecna-01.mp3",
+            "/sounds/vecna/vecna-02.mp3",
+            "/sounds/vecna/vecna-03.mp3",
+            "/sounds/vecna/vecna-04.mp3",
+            "/sounds/vecna/vecna-05.mp3",
+        ];
+
+        const selectedVoice = finalKill
+            ? "/sounds/vecna/vecna-final.mp3"
+            : voiceFiles[Math.floor(Math.random() * voiceFiles.length)];
+
+        this.vecnaVoice = new Audio(selectedVoice);
+        this.vecnaVoice.volume = this.muted ? 0 : this.volume;
+        this.vecnaVoice.muted = this.muted;
+
+        void this.vecnaVoice.play().catch((error) => {
+            console.error("Vecna voice failed:", error);
+        });
+    }
 
     private bassImpact() {
         if (this.muted) return;
@@ -279,21 +310,7 @@ class SoundController {
             osc.stop(now + 1.85);
         }
 
-        if ("speechSynthesis" in window) {
-            window.speechSynthesis.cancel();
-
-            const voice = new SpeechSynthesisUtterance(
-                finalKill
-                    ? "You belong to me now. Your mind is mine."
-                    : VECNA_LINES[Math.floor(Math.random() * VECNA_LINES.length)]
-            );
-
-            voice.pitch = 0.15;
-            voice.rate = 0.7;
-            voice.volume = 1;
-
-            window.speechSynthesis.speak(voice);
-        }
+        this.playVecnaVoice(finalKill);
     }
 
     stopAll() {
@@ -303,7 +320,10 @@ class SoundController {
         this.stopTrack(this.gameplay);
         this.stopTrack(this.death);
         this.stopTrack(this.victory);
-        window.speechSynthesis?.cancel();
+        if (this.vecnaVoice) {
+            this.vecnaVoice.pause();
+            this.vecnaVoice.currentTime = 0;
+        }
     }
 }
 

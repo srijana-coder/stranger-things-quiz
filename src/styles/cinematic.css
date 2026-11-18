@@ -225,8 +225,13 @@
     object-position: center;
     z-index: 1;
     opacity: 0;
-    animation: cave-video-reveal 2s ease forwards;
+    animation: none;
     filter: brightness(0.65) contrast(1.2) saturate(1.25);
+}
+
+/* Reveal the video only after the user begins. */
+.vecna-intro-video.intro-video-active {
+    animation: cave-video-reveal 2s ease forwards;
 }
 
 .intro-video-overlay {
