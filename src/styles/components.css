@@ -1,0 +1,228 @@
+/* VECNA */
+
+.vecna {
+    position: fixed;
+    z-index: 2;
+    bottom: -90px;
+    left: 50%;
+    width: 230px;
+    height: 440px;
+    pointer-events: none;
+    transform-origin: bottom center;
+    transition:
+            transform 1s cubic-bezier(0.2, 1, 0.3, 1),
+            opacity 1s;
+    filter: drop-shadow(0 0 22px rgba(255, 0, 20, 0.45));
+}
+
+.vecna-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 25%, rgba(160, 0, 15, 0.45), transparent 65%);
+}
+
+.vecna-head {
+    position: absolute;
+    top: 30px;
+    left: 77px;
+    width: 78px;
+    height: 105px;
+    border: 2px solid #50050d;
+    border-radius: 48% 48% 42% 42%;
+    background:
+            repeating-linear-gradient(105deg, transparent 0 8px, rgba(120, 0, 12, 0.25) 9px 11px), #100306;
+    box-shadow: inset 0 0 20px #59050b;
+}
+
+.vecna-eyes {
+    position: absolute;
+    top: 40px;
+    left: 16px;
+    display: flex;
+    gap: 17px;
+}
+
+.vecna-eyes i {
+    width: 9px;
+    height: 4px;
+    border-radius: 50%;
+    background: #ff1725;
+    box-shadow: 0 0 12px 3px red;
+    animation: eye-glow 1.3s infinite alternate;
+}
+
+.vecna-body {
+    position: absolute;
+    top: 125px;
+    left: 20px;
+    width: 190px;
+    height: 340px;
+    border: 2px solid #35050a;
+    border-radius: 50% 50% 0 0;
+    background:
+            repeating-linear-gradient(115deg, transparent 0 9px, rgba(100, 0, 10, 0.18) 10px 13px),
+            linear-gradient(#160306, #050103);
+}
+
+.vecna-arm {
+    position: absolute;
+    top: 145px;
+    width: 45px;
+    height: 210px;
+    border: 2px solid #50050d;
+    background: #100306;
+    transform-origin: top center;
+}
+
+.vecna-arm.left {
+    left: 22px;
+    transform: rotate(18deg);
+}
+
+.vecna-arm.right {
+    right: 5px;
+    transform: rotate(-27deg);
+}
+
+.vecna-attack {
+    animation: lunge 0.6s ease;
+}
+
+.danger-mode {
+    animation: danger-pulse 2s infinite alternate;
+}
+
+.shake {
+    animation: shake 0.45s ease;
+}
+
+/* Clock */
+
+.grandfather-clock {
+    width: 96px;
+    color: #7d232c;
+    pointer-events: none;
+    filter: drop-shadow(0 0 10px rgba(174, 15, 29, 0.22));
+}
+
+.clock-face {
+    position: relative;
+    width: 74px;
+    height: 74px;
+    margin: 0 auto -6px;
+    border: 5px solid #33171c;
+    border-radius: 50%;
+    background:
+            radial-gradient(circle, #21090e 0 6%, transparent 7%),
+            repeating-conic-gradient(from 0deg, #8e343d 0 1deg, transparent 1deg 30deg), #090507;
+    box-shadow: inset 0 0 18px #000;
+}
+
+.clock-face i,
+.clock-face b {
+    position: absolute;
+    bottom: 50%;
+    left: calc(50% - 1px);
+    width: 2px;
+    background: #c23a45;
+    transform-origin: bottom center;
+}
+
+.clock-face i {
+    height: 25px;
+    animation: clock-minute 10s linear infinite;
+}
+
+.clock-face b {
+    height: 18px;
+    transform: rotate(120deg);
+}
+
+.clock-body {
+    position: relative;
+    width: 82px;
+    height: 145px;
+    margin: auto;
+    border: 6px solid #281317;
+    border-radius: 7px 7px 3px 3px;
+    background: linear-gradient(90deg, #0b0608, #210d12 50%, #080405);
+    box-shadow: inset 0 0 20px #000;
+}
+
+.clock-body span {
+    position: absolute;
+    top: 18px;
+    left: calc(50% - 2px);
+    width: 4px;
+    height: 67px;
+    background: #87303a;
+    transform-origin: top;
+    animation: pendulum 1.2s ease-in-out infinite alternate;
+}
+
+.clock-body span::after {
+    position: absolute;
+    bottom: -12px;
+    left: -8px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #87303a;
+    border-radius: 50%;
+    content: "";
+}
+
+.intro-clock {
+    position: absolute;
+    z-index: 4;
+    opacity: 0;
+    transform: scale(1.65);
+    animation: intro-clock-appear 3.8s 0.35s both;
+}
+
+.quiz-clock {
+    position: fixed;
+    z-index: 3;
+    right: max(20px, calc((100vw - 1080px) / 2));
+    bottom: 40px;
+    opacity: 0.42;
+    transform: scale(0.78);
+    transform-origin: bottom right;
+    transition:
+            filter 0.3s,
+            opacity 0.3s,
+            transform 0.3s;
+}
+
+.clock-critical {
+    opacity: 0.88;
+    transform: scale(0.86);
+    filter: drop-shadow(0 0 18px rgba(255, 23, 39, 0.75));
+    animation: clock-danger 0.45s infinite alternate;
+}
+
+.clock-expired {
+    filter: drop-shadow(0 0 35px red) brightness(1.8);
+    animation: clock-impact 0.45s ease;
+}
+
+/* Stronger Vecna approach */
+
+.danger-1 .vecna {
+    --vecna-opacity: 0.25;
+}
+
+.danger-2 .vecna {
+    --vecna-opacity: 0.42;
+}
+
+.danger-3 .vecna {
+    --vecna-opacity: 0.62;
+}
+
+.danger-4 .vecna {
+    --vecna-opacity: 0.82;
+}
+
+.danger-5 .vecna {
+    --vecna-opacity: 1;
+}

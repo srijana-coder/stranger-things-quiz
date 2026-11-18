@@ -1,0 +1,387 @@
+/* Cinematic */
+
+.cinematic {
+    position: fixed;
+    z-index: 50;
+    inset: 0;
+    display: grid;
+    width: 100%;
+    height: 100%;
+    place-items: center;
+    overflow: hidden;
+    background: #000;
+}
+
+.cinematic-gate {
+    z-index: 4;
+    width: min(500px, calc(100% - 40px));
+    text-align: center;
+}
+
+.cinematic-gate > span {
+    color: #7d6469;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 0.3em;
+}
+
+.cinematic-gate h1 {
+    margin: 18px 0 10px;
+    color: #e22837;
+    font-family: Cinzel, serif;
+    font-size: clamp(35px, 8vw, 65px);
+    text-shadow: 0 0 25px rgba(225, 24, 39, 0.45);
+}
+
+.cinematic-gate p {
+    margin-bottom: 25px;
+    color: #8d797d;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.cinematic-gate .primary-button {
+    max-width: 350px;
+}
+
+.skip-intro {
+    position: fixed;
+    z-index: 12;
+    right: 25px;
+    bottom: 25px;
+    padding: 11px 16px;
+    border: 1px solid rgba(208, 38, 51, 0.55);
+    border-radius: 4px;
+    color: #d2b6bb;
+    background: rgba(0, 0, 0, 0.75);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.skip-intro:hover {
+    color: #fff;
+    border-color: #d02633;
+    background: rgba(120, 0, 15, 0.35);
+    box-shadow: 0 0 18px rgba(208, 38, 51, 0.25);
+}
+
+.intro-audio-controls {
+    position: fixed;
+    z-index: 12;
+    bottom: 23px;
+    left: 25px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.intro-audio-controls .sound-button {
+    background: rgba(0, 0, 0, 0.65);
+}
+
+.cinematic-playing::after {
+    position: absolute;
+    z-index: 10;
+    inset: 0;
+    pointer-events: none;
+    background: #d60f22;
+    opacity: 0;
+    content: "";
+    animation: cinematic-flash 9s both;
+}
+
+.intro-fog {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    opacity: 0;
+    background:
+            radial-gradient(ellipse at 50% 75%, rgba(125, 5, 18, 0.65), transparent 40%),
+            linear-gradient(0deg, #130307, transparent 65%);
+    filter: blur(18px);
+    animation: intro-fog-spread 8.5s 1s both;
+}
+
+.cinematic .vecna {
+    z-index: 3;
+    bottom: -12%;
+    width: min(48vw, 460px);
+    height: 78vh;
+    opacity: 0;
+    animation: intro-vecna 7s 1.7s cubic-bezier(0.16, 0.8, 0.2, 1) both;
+}
+
+.cinematic-title {
+    position: absolute;
+    z-index: 11;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0;
+    font-family: Cinzel, serif;
+    text-align: center;
+    animation: intro-title 2.2s 6.55s both;
+}
+
+.cinematic-title span {
+    color: transparent;
+    font-size: clamp(43px, 9vw, 100px);
+    font-weight: 900;
+    letter-spacing: 0.03em;
+    -webkit-text-stroke: 1.5px #ef2a39;
+    text-shadow: 0 0 28px rgba(228, 24, 41, 0.45);
+}
+
+.cinematic-title strong {
+    margin-top: 17px;
+    color: #e8d5d7;
+    font-size: clamp(12px, 2vw, 20px);
+    letter-spacing: 0.55em;
+    text-indent: 0.55em;
+}
+
+.death-screen {
+    isolation: isolate;
+    position: relative;
+    width: 100%;
+    min-height: calc(100vh - 76px);
+    overflow: visible;
+}
+
+.death-screen > *:not(.quizloss-video) {
+    position: relative;
+    z-index: 5;
+}
+
+.quizloss-video {
+    position: absolute;
+    top: -90px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 100vw;
+    max-width: none;
+    height: calc(100vh + 90px);
+
+    object-fit: cover;
+    object-position: center;
+
+    z-index: 0;
+    pointer-events: none;
+
+    filter: brightness(0.40) contrast(1.08) saturate(0.9);
+}
+
+.death-distortion {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    pointer-events: none;
+    background:
+            repeating-linear-gradient(
+                    0deg,
+                    transparent 0 3px,
+                    rgba(255, 255, 255, 0.025) 4px
+            ),
+            radial-gradient(
+                    circle,
+                    transparent 15%,
+                    rgba(45, 0, 7, 0.54) 78%
+            );
+    animation: distortion 0.18s steps(2) infinite;
+}
+
+.death-screen .primary-button,
+.death-screen .text-button {
+    max-width: 380px;
+}
+
+/* Mobile Vecna sizing — kept here so it still comes before the .vecna rules below that override it */
+@media (max-width: 760px) {
+    .cinematic .vecna {
+        width: min(88vw, 420px);
+        height: 72vh;
+    }
+
+    .death-screen .vecna {
+        width: min(108vw, 520px);
+        height: 78vh;
+    }
+}
+
+/* =====================================
+   VECNA CAVE CINEMATIC VIDEO UPGRADE
+===================================== */
+
+.vecna-intro-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    opacity: 0;
+    animation: cave-video-reveal 2s ease forwards;
+    filter: brightness(0.65) contrast(1.2) saturate(1.25);
+}
+
+.intro-video-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+            linear-gradient(
+                    0deg,
+                    rgba(5, 0, 3, 0.9),
+                    transparent 40%,
+                    rgba(5, 0, 3, 0.45)
+            ),
+            radial-gradient(
+                    ellipse at center,
+                    transparent 20%,
+                    rgba(10, 0, 5, 0.65) 100%
+            );
+}
+
+.intro-video-fallback {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+}
+
+.intro-video-fallback .vecna {
+    opacity: 1;
+    width: min(70vw, 500px);
+    height: 85vh;
+}
+
+.cinematic-title {
+    z-index: 8;
+    text-shadow: 0 0 30px #ff152b;
+}
+
+.intro-clock {
+    z-index: 5;
+}
+
+.skip-intro,
+.intro-audio-controls {
+    z-index: 12;
+}
+
+/* ===== CINEMATIC VECNA DEATH SEQUENCE ===== */
+
+.death-screen {
+    position: relative;
+    isolation: isolate;
+    min-height: calc(100vh - 76px);
+    animation: death-entry 0.8s ease-out both;
+}
+
+.death-screen .vecna {
+    position: fixed;
+    left: 50%;
+    bottom: -5vh;
+    z-index: 1;
+    width: min(90vw, 750px);
+    height: 100vh;
+    opacity: 1;
+    transform-origin: center bottom;
+    animation: vecna-final-approach 4s
+    cubic-bezier(.15,.8,.25,1) forwards;
+}
+
+.death-screen .death-title {
+    position: relative;
+    z-index: 6;
+    animation: death-title-reveal 1.5s 1s both;
+    text-shadow:
+            0 0 10px #ff001b,
+            0 0 35px #a00012,
+            0 0 70px #ff001b;
+}
+
+.death-screen .eyebrow,
+.death-screen p,
+.death-screen .ending-score,
+.death-screen button {
+    position: relative;
+    z-index: 7;
+}
+
+.death-distortion {
+    position: fixed;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    background:
+            repeating-linear-gradient(
+                    0deg,
+                    transparent 0 3px,
+                    rgba(255,0,20,.04) 4px
+            ),
+            radial-gradient(
+                    circle,
+                    transparent 10%,
+                    rgba(70,0,10,.8) 100%
+            );
+    animation: death-distortion 0.18s infinite;
+}
+
+.intro-tagline {
+    margin-top: 18px;
+    color: rgba(220, 180, 180, 0.65);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(220, 25, 45, 0.35);
+}
+
+/* Atmospheric red fog on the opening screen */
+.cinematic-gate {
+    position: relative;
+    isolation: isolate;
+}
+
+.cinematic-gate::before,
+.cinematic-gate::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    width: 450px;
+    height: 350px;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.16;
+    animation: intro-red-fog 9s ease-in-out infinite alternate;
+}
+
+.cinematic-gate::before {
+    top: -180px;
+    left: -220px;
+    background: rgba(150, 0, 20, 0.8);
+}
+
+.cinematic-gate::after {
+    right: -220px;
+    bottom: -180px;
+    background: rgba(190, 10, 30, 0.65);
+    animation-delay: -4s;
+}
+
+@keyframes intro-red-fog {
+    from {
+        transform: translate(0, 0) scale(0.9);
+    }
+    to {
+        transform: translate(45px, 25px) scale(1.2);
+    }
+}

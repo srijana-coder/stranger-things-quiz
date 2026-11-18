@@ -1,0 +1,203 @@
+.background-glow {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+            radial-gradient(circle at 50% 20%, transparent 10%, rgba(0, 0, 0, 0.45) 90%),
+            repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255, 255, 255, 0.012) 4px);
+}
+
+.vines {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.4;
+    background:
+            radial-gradient(ellipse at -5% 5%, #620710 0%, transparent 28%),
+            radial-gradient(ellipse at 105% 15%, #52030b 0%, transparent 30%),
+            radial-gradient(ellipse at 50% 110%, #62050c 0%, transparent 35%);
+}
+
+.lightning {
+    position: fixed;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    opacity: 0;
+    background: rgba(255, 20, 35, 0.13);
+    animation: lightning 11s infinite;
+}
+
+.particles {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.particles i {
+    position: absolute;
+    bottom: -15px;
+    border-radius: 50%;
+    background: rgba(255, 205, 210, 0.45);
+    box-shadow: 0 0 8px rgba(255, 40, 55, 0.65);
+    animation: float-up linear infinite;
+}
+
+/* FINAL SURVIVAL UPGRADE */
+
+.app {
+    --pointer-x: 50%;
+    --pointer-y: 50%;
+    --parallax-x: 0px;
+    --parallax-y: 0px;
+}
+
+.cursor-light {
+    position: fixed;
+    z-index: 1;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+            circle 240px at var(--pointer-x) var(--pointer-y),
+            rgba(205, 28, 43, 0.09),
+            transparent 72%
+    );
+}
+
+.fog {
+    position: fixed;
+    z-index: 0;
+    left: -30%;
+    width: 160%;
+    height: 44vh;
+    pointer-events: none;
+    opacity: 0.25;
+    filter: blur(28px);
+    background:
+            radial-gradient(ellipse at 20% 50%, rgba(94, 5, 16, 0.65), transparent 28%),
+            radial-gradient(ellipse at 65% 50%, rgba(19, 11, 16, 0.9), transparent 34%),
+            radial-gradient(ellipse at 88% 35%, rgba(100, 4, 17, 0.5), transparent 22%);
+}
+
+.fog-one {
+    bottom: -10%;
+    animation: fog-drift 18s ease-in-out infinite alternate;
+}
+
+.fog-two {
+    top: 10%;
+    opacity: 0.13;
+    transform: scaleX(-1);
+    animation: fog-drift-reverse 25s ease-in-out infinite alternate;
+}
+
+.vines {
+    z-index: 2;
+    opacity: 0.34;
+    transform: translate(var(--parallax-x), var(--parallax-y)) scale(calc(1 + var(--vine-danger, 0)));
+    transition:
+            transform 1.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+            opacity 0.6s;
+}
+
+.vines i {
+    position: absolute;
+    width: 34vw;
+    height: 48vh;
+    border: clamp(7px, 1.1vw, 16px) solid rgba(30, 3, 8, 0.94);
+    border-right-color: rgba(102, 7, 17, 0.55);
+    border-radius: 48% 52% 42% 58%;
+    filter: drop-shadow(0 0 9px rgba(151, 7, 20, 0.3));
+    animation: vine-breathe 7s ease-in-out infinite alternate;
+}
+
+.vines i::after {
+    position: absolute;
+    inset: 8%;
+    border: 3px solid rgba(77, 5, 13, 0.7);
+    border-radius: inherit;
+    content: "";
+}
+
+.vines i:nth-child(1) {
+    top: -24%;
+    left: -19%;
+    transform: rotate(38deg);
+}
+
+.vines i:nth-child(2) {
+    top: -20%;
+    right: -22%;
+    transform: rotate(-42deg);
+    animation-delay: -2s;
+}
+
+.vines i:nth-child(3) {
+    bottom: -27%;
+    left: -18%;
+    transform: rotate(130deg);
+    animation-delay: -4s;
+}
+
+.vines i:nth-child(4) {
+    right: -16%;
+    bottom: -30%;
+    transform: rotate(-135deg);
+    animation-delay: -1s;
+}
+
+.danger-1 .vines {
+    --vine-danger: 0.01;
+    opacity: 0.42;
+}
+
+.danger-2 .vines {
+    --vine-danger: 0.025;
+    opacity: 0.5;
+}
+
+.danger-3 .vines {
+    --vine-danger: 0.04;
+    opacity: 0.58;
+}
+
+.danger-4 .vines,
+.danger-5 .vines {
+    --vine-danger: 0.065;
+    opacity: 0.68;
+}
+
+.particles {
+    transform: translate(var(--spore-parallax-x, 0), var(--spore-parallax-y, 0));
+    transition: transform 1.6s ease-out;
+}
+
+.particles i {
+    background: rgba(232, 216, 219, var(--spore-opacity));
+    box-shadow: 0 0 8px rgba(255, 40, 55, var(--spore-glow));
+    animation-name: float-up-interactive;
+}
+
+.lightning {
+    background:
+            linear-gradient(113deg, transparent 42%, rgba(255, 28, 43, 0.24) 42.3%, transparent 43%),
+            linear-gradient(72deg, transparent 62%, rgba(255, 42, 55, 0.18) 62.3%, transparent 63%),
+            rgba(255, 20, 35, var(--lightning-alpha));
+    animation-duration: var(--lightning-speed);
+}
+
+.death-mode .lightning {
+    animation-duration: 2.4s;
+}
+
+.death-mode .fog {
+    opacity: 0.48;
+}
+
+.death-mode .lightning {
+    animation-duration: 1.8s;
+}

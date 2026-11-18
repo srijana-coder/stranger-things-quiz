@@ -1,0 +1,353 @@
+@keyframes lightning {
+    0%,
+    89%,
+    91%,
+    94%,
+    100% {
+        opacity: 0;
+    }
+    90%,
+    93% {
+        opacity: 1;
+    }
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(-110vh) translateX(35px);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    to {
+        transform: scale(1.06);
+    }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes title-flicker {
+    0%,
+    95%,
+    97%,
+    100% {
+        opacity: 1;
+    }
+    96% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes eye-glow {
+    to {
+        opacity: 0.45;
+    }
+}
+
+@keyframes lunge {
+    0% {
+        filter: brightness(1);
+    }
+    50% {
+        filter: brightness(2) drop-shadow(0 0 45px red);
+    }
+    100% {
+        filter: brightness(1);
+    }
+}
+
+@keyframes danger-pulse {
+    to {
+        box-shadow: inset 0 0 100px rgba(170, 0, 20, 0.22);
+    }
+}
+
+@keyframes shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    20%,
+    60% {
+        transform: translateX(-5px);
+    }
+    40%,
+    80% {
+        transform: translateX(5px);
+    }
+}
+
+@keyframes fog-drift {
+    to {
+        transform: translateX(11%) scale(1.08);
+    }
+}
+
+@keyframes fog-drift-reverse {
+    to {
+        transform: translateX(-9%) scaleX(-1.08);
+    }
+}
+
+@keyframes vine-breathe {
+    to {
+        border-radius: 56% 44% 57% 43%;
+        filter: drop-shadow(0 0 16px rgba(151, 7, 20, 0.48));
+    }
+}
+
+@keyframes float-up-interactive {
+    0% {
+        transform: translate3d(0, 0, 0) rotate(0);
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translate3d(var(--spore-drift), -110vh, 0) rotate(280deg);
+        opacity: 0;
+    }
+}
+
+@keyframes cinematic-flash {
+    0%,
+    66%,
+    70%,
+    100% {
+        opacity: 0;
+    }
+    67% {
+        opacity: 0.05;
+    }
+    68% {
+        opacity: 0.48;
+    }
+    69% {
+        opacity: 0;
+    }
+}
+
+@keyframes intro-fog-spread {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    40%,
+    100% {
+        opacity: 0.75;
+        transform: scale(1.15);
+    }
+}
+
+@keyframes intro-clock-appear {
+    0% {
+        opacity: 0;
+        transform: scale(1.3);
+    }
+    30%,
+    75% {
+        opacity: 0.9;
+        transform: scale(1.65);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(2.1);
+        filter: blur(5px);
+    }
+}
+
+@keyframes intro-vecna {
+    0%,
+    15% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.58);
+    }
+    50% {
+        opacity: 0.48;
+    }
+    100% {
+        opacity: 0.95;
+        transform: translateX(-50%) scale(1.08);
+    }
+}
+
+@keyframes intro-title {
+    from {
+        opacity: 0;
+        transform: scale(1.2);
+        filter: blur(5px);
+    }
+    35%,
+    80% {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes clock-minute {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pendulum {
+    from {
+        transform: rotate(-18deg);
+    }
+    to {
+        transform: rotate(18deg);
+    }
+}
+
+@keyframes clock-danger {
+    to {
+        filter: drop-shadow(0 0 25px rgba(255, 23, 39, 0.95)) brightness(1.35);
+    }
+}
+
+@keyframes clock-impact {
+    25% {
+        transform: scale(1.05) rotate(-3deg);
+    }
+    60% {
+        transform: scale(0.82) rotate(3deg);
+    }
+}
+
+@keyframes vecna-breathe {
+    to {
+        transform: translate3d(
+                calc(-50% + var(--vecna-parallax-x, 0px)),
+                calc(5px + var(--vecna-parallax-y, 0px)),
+                0
+        )
+        scale(var(--vecna-breathe-scale));
+    }
+}
+
+@keyframes lunge-image {
+    45% {
+        filter: brightness(1.55) saturate(1.5) drop-shadow(0 0 50px red);
+        transform: translateX(-50%) scale(var(--vecna-lunge-scale));
+    }
+}
+
+@keyframes death-zoom {
+    from {
+        transform: translateX(-50%) scale(0.8);
+        filter: brightness(0.35) blur(3px);
+    }
+    to {
+        transform: translateX(-50%) scale(1.58);
+        filter: brightness(0.9) blur(0) drop-shadow(0 0 65px #b70018);
+    }
+}
+
+@keyframes distortion {
+    50% {
+        transform: translateX(2px);
+        filter: hue-rotate(8deg);
+    }
+}
+
+@keyframes escape-light {
+    from {
+        opacity: 0;
+        transform: scale(0.65);
+        filter: brightness(2);
+    }
+    40% {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.75;
+        transform: scale(1.15);
+    }
+}
+
+@keyframes cave-video-reveal {
+    from {
+        opacity: 0;
+        transform: scale(1.12);
+        filter: brightness(0.2) blur(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+        filter: brightness(0.65) contrast(1.2) saturate(1.25);
+    }
+}
+
+@keyframes death-entry {
+    from {
+        opacity: 0;
+        filter: brightness(0);
+    }
+    to {
+        opacity: 1;
+        filter: brightness(1);
+    }
+}
+
+@keyframes vecna-final-approach {
+    0% {
+        transform: translateX(-50%) scale(.65);
+        filter: brightness(.3);
+    }
+    65% {
+        transform: translateX(-50%) scale(1.12);
+        filter: brightness(.85);
+    }
+    100% {
+        transform: translateX(-50%) scale(1.3);
+        filter: brightness(1.1);
+    }
+}
+
+@keyframes death-title-reveal {
+    0% {
+        opacity: 0;
+        transform: scale(1.7);
+        letter-spacing: .5em;
+    }
+    60% {
+        opacity: 1;
+        transform: scale(.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        letter-spacing: .1em;
+    }
+}
+
+@keyframes death-distortion {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(2px); }
+    50% { transform: translateX(-2px); }
+    75% { transform: translateX(1px); }
+    100% { transform: translateX(0); }
+}

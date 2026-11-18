@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;900&family=Creepster&family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+:root {
+    --black: #050204;
+    --dark-red: #170306;
+    --blood: #a30916;
+    --red: #ff2635;
+    --red-glow: rgba(255, 25, 40, 0.45);
+    --green: #55e89a;
+    --white: #f5eeee;
+    --muted: #a48b90;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    min-height: 100%;
+    background: var(--black);
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    background: var(--black);
+    color: var(--white);
+    font-family: Inter, sans-serif;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid #ff5360;
+    outline-offset: 4px;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+.app {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow: hidden;
+    background:
+            radial-gradient(ellipse at 50% 40%, rgba(102, 5, 16, 0.24), transparent 55%),
+            radial-gradient(ellipse at 0% 100%, rgba(66, 5, 35, 0.25), transparent 50%),
+            linear-gradient(145deg, #080207, #160307 55%, #030103);
+}
+
+/* COMMON */
+
+main {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    flex: 1;
+}
+
+.eyebrow {
+    color: var(--red);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.35em;
+    text-align: center;
+}
+
+.site-footer {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 18px 5%;
+    border-top: 1px solid rgba(255, 38, 53, 0.15);
+    color: #795d63;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+}

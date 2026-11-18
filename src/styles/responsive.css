@@ -1,0 +1,168 @@
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+    .header {
+        padding: 12px 15px;
+    }
+
+    .header-right {
+        gap: 6px;
+    }
+
+    .stat {
+        min-width: 58px;
+        padding: 6px;
+    }
+
+    .stat strong {
+        font-size: 15px;
+    }
+
+    .sound-button {
+        padding: 9px 7px;
+        font-size: 8px;
+    }
+
+    .start-screen {
+        padding: 65px 18px;
+    }
+
+    .options-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .quiz-screen {
+        padding: 35px 15px;
+    }
+
+    .quiz-card {
+        padding: 20px 15px;
+    }
+
+    .vecna {
+        left: 50%;
+        opacity: 0.2;
+    }
+
+    .site-footer {
+        padding: 15px;
+        font-size: 7px;
+    }
+
+    .quiz-footer {
+        font-size: 7px;
+    }
+
+    .game-rules {
+        gap: 9px;
+        font-size: 8px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (max-width: 760px) {
+    .volume-control {
+        width: 58px;
+    }
+
+    .volume-control span {
+        display: none;
+    }
+
+    .header .stat:first-of-type {
+        display: none;
+    }
+
+    .quiz-clock {
+        right: -13px;
+        bottom: 20px;
+        opacity: 0.26;
+        transform: scale(0.52);
+    }
+
+    .vecna {
+        bottom: -75px;
+        width: 280px;
+        height: 440px;
+    }
+
+    .cinematic-title strong {
+        letter-spacing: 0.32em;
+        text-indent: 0.32em;
+    }
+
+    .death-title {
+        margin-top: 100px;
+    }
+
+    .ending-actions {
+        flex-direction: column;
+    }
+
+    .vines i {
+        width: 58vw;
+    }
+}
+
+@media (hover: none), (pointer: coarse) {
+    .cursor-light {
+        display: none;
+    }
+
+    .vines,
+    .particles {
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cursor-light {
+        display: none;
+    }
+
+    .vines,
+    .particles,
+    .vecna {
+        transform: none;
+    }
+
+    .cinematic-playing .cinematic-title,
+    .cinematic-playing .intro-clock,
+    .cinematic-playing .vecna {
+        opacity: 1;
+    }
+}
+
+/* Mobile cinematic */
+
+@media (max-width: 600px) {
+    .vecna-intro-video {
+        object-position: 55% center;
+    }
+
+    .cinematic-title span {
+        font-size: clamp(34px, 10vw, 65px);
+    }
+
+    .cinematic-title strong {
+        font-size: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .death-screen *,
+    .death-distortion {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
